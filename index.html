@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Developer | iOS & Android</title>
+    <title>Hanif Qureshi - Mobile Application Developer</title>
     <style>
         * {
             margin: 0;
@@ -16,38 +16,46 @@
             background: #ffffff;
             color: #1a1a1a;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         header {
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
             z-index: 100;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #1a1a1a;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -60,67 +68,88 @@
             color: #666;
             text-decoration: none;
             font-size: 0.95rem;
+            font-weight: 500;
             transition: color 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: #1a1a1a;
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1a1a1a;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 6rem;
+            padding-top: 5rem;
         }
 
-        .hero-content {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .platforms {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin: 4rem 0;
-        }
-
-        .platform-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            transition: transform 0.3s;
-            background: #f8f8f8;
         }
 
-        .platform-icon:hover {
-            transform: translateY(-5px);
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-content h1 span {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .experience-badge {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
         }
 
         .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
             background: #1a1a1a;
             color: white;
             text-decoration: none;
@@ -136,78 +165,217 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        section {
-            padding: 6rem 0;
+        .btn-secondary {
+            background: white;
+            color: #1a1a1a;
+            border: 2px solid #e0e0e0;
         }
 
-        h2 {
-            font-size: 3rem;
+        .btn-secondary:hover {
+            background: #f8f8f8;
+            border-color: #1a1a1a;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #f8f8f8;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #ccc;
+        }
+
+        .profile-ring {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+            border-top-color: #667eea;
+            border-right-color: #764ba2;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .tech-stack {
+            padding: 6rem 0;
+            background: #fafafa;
+        }
+
+        .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            margin-bottom: 1rem;
             letter-spacing: -0.02em;
         }
 
-        .skills-grid {
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+        }
+
+        .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: #e0e0e0;
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tech-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .expertise {
+            padding: 6rem 0;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .skill-card {
-            padding: 2.5rem;
-            background: #f8f8f8;
-            border-radius: 20px;
+        .expertise-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: #fafafa;
+            border-radius: 16px;
             transition: all 0.3s;
         }
 
-        .skill-card:hover {
-            background: #f0f0f0;
-            transform: translateY(-5px);
+        .expertise-item:hover {
+            background: #f5f5f5;
+            transform: translateX(5px);
         }
 
-        .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .expertise-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
         }
 
-        .skill-card p {
+        .expertise-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .expertise-content p {
             color: #666;
             line-height: 1.6;
         }
 
-        .contact {
+        .contact-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
-            background: #f8f8f8;
-            padding: 6rem 2rem;
-            border-radius: 30px;
         }
 
-        .contact h2 {
-            margin-bottom: 1.5rem;
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
 
-        .contact p {
-            font-size: 1.25rem;
-            color: #666;
+        .contact-section p {
+            font-size: 1.2rem;
             margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .contact-section .btn {
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .contact-section .btn:hover {
+            background: #f8f8f8;
+            transform: translateY(-2px);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 2rem;
         }
 
-        .social-links a {
+        .social-link {
             width: 50px;
             height: 50px;
-            background: white;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -217,57 +385,74 @@
             transition: all 0.3s;
         }
 
-        .social-links a:hover {
+        .social-link:hover {
+            background: white;
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
             color: #999;
             font-size: 0.9rem;
+            border-top: 1px solid #f0f0f0;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
 
-            .hero p {
-                font-size: 1.1rem;
+            .hero-content h1 {
+                font-size: 3rem;
             }
 
-            h2 {
-                font-size: 2rem;
+            .cta-buttons {
+                justify-content: center;
             }
 
-            .platforms {
-                gap: 1.5rem;
+            .profile-container {
+                width: 300px;
+                height: 300px;
+                margin: 0 auto;
             }
 
-            .platform-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
+            .expertise-grid {
+                grid-template-columns: 1fr;
             }
 
             .nav-links {
-                gap: 1.5rem;
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
             }
 
-            .skills-grid {
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tech-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
-            <div class="logo">Portfolio</div>
+            <div class="logo">Hanif Qureshi</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -276,65 +461,172 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-content">
-                <h1>iOS & Android<br>Developer</h1>
-                <p>Creating elegant mobile experiences with clean code and intuitive design</p>
-                
-                <div class="platforms">
-                    <div class="platform-icon">🍎</div>
-                    <div class="platform-icon">🤖</div>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="experience-badge">10+ Years of Excellence</div>
+                    <h1>
+                        Mobile Application
+                        <span>Developer</span>
+                    </h1>
+                    <p>Expert in iOS & Android Native Development and Cross-Platform Solutions. Crafting exceptional mobile experiences that users love.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn">Let's Connect</a>
+                        <a href="#expertise" class="btn btn-secondary">View Expertise</a>
+                    </div>
                 </div>
-
-                <a href="#contact" class="btn">Get In Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2>What I Do</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>📱 iOS Development</h3>
-                    <p>Building native iOS apps with Swift and SwiftUI. Focus on performance, smooth animations, and following Apple's design guidelines.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🤖 Android Development</h3>
-                    <p>Creating powerful Android applications using Kotlin and Jetpack Compose. Material Design implementation and modern architecture.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🎨 UI/UX Design</h3>
-                    <p>Designing beautiful, user-friendly interfaces that provide exceptional user experiences across all devices.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>⚡ Performance</h3>
-                    <p>Optimizing apps for speed, efficiency, and battery life. Writing clean, maintainable code that scales.</p>
+                <div class="hero-image">
+                    <div class="profile-container">
+                        <div class="profile-ring"></div>
+                        <div class="profile-image">👨‍💻</div>
+                        <!-- Replace the div above with an actual image:
+                        <img src="your-photo.jpg" alt="Hanif Qureshi" class="profile-image"> -->
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="expertise" id="expertise">
         <div class="container">
-            <div class="contact" id="contact">
-                <h2>Let's Work Together</h2>
-                <p>Have a project in mind? Let's create something amazing.</p>
-                <a href="mailto:your.email@example.com" class="btn">Send Email</a>
-                
-                <div class="social-links">
-                    <a href="https://github.com/yourusername" target="_blank">📎</a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank">💼</a>
-                    <a href="https://twitter.com/yourusername" target="_blank">🐦</a>
+            <h2 class="section-title">Core Expertise</h2>
+            <p class="section-subtitle">10 years of building world-class mobile applications</p>
+            
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <div class="expertise-icon">🍎</div>
+                    <div class="expertise-content">
+                        <h3>iOS Native Development</h3>
+                        <p>Expert in Swift, SwiftUI, and Objective-C. Building powerful iOS applications following Apple's Human Interface Guidelines with seamless performance.</p>
+                    </div>
                 </div>
+                <div class="expertise-item">
+                    <div class="expertise-icon">🤖</div>
+                    <div class="expertise-content">
+                        <h3>Android Native Development</h3>
+                        <p>Proficient in Kotlin and Java with Jetpack Compose. Creating beautiful Material Design apps with robust architecture and optimal performance.</p>
+                    </div>
+                </div>
+                <div class="expertise-item">
+                    <div class="expertise-icon">⚡</div>
+                    <div class="expertise-content">
+                        <h3>Cross-Platform Solutions</h3>
+                        <p>Experienced in React Native and Flutter. Delivering efficient cross-platform apps with native performance and single codebase benefits.</p>
+                    </div>
+                </div>
+                <div class="expertise-item">
+                    <div class="expertise-icon">🏗️</div>
+                    <div class="expertise-content">
+                        <h3>App Architecture</h3>
+                        <p>Implementing clean architecture patterns, MVVM, MVP, and MVI. Building scalable, maintainable, and testable mobile applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Comprehensive expertise across mobile development ecosystem</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">📱</div>
+                    <h3>iOS Development</h3>
+                    <p>Building native iOS applications with modern Swift and SwiftUI</p>
+                    <div class="tech-tags">
+                        <span class="tag">Swift</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">UIKit</span>
+                        <span class="tag">Objective-C</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🤖</div>
+                    <h3>Android Development</h3>
+                    <p>Creating powerful Android apps with Kotlin and modern frameworks</p>
+                    <div class="tech-tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Jetpack Compose</span>
+                        <span class="tag">XML</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🌐</div>
+                    <h3>Cross-Platform</h3>
+                    <p>Efficient multi-platform development with shared codebase</p>
+                    <div class="tech-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🔧</div>
+                    <h3>Backend & APIs</h3>
+                    <p>Integration with RESTful APIs and backend services</p>
+                    <div class="tech-tags">
+                        <span class="tag">REST APIs</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🗄️</div>
+                    <h3>Data Management</h3>
+                    <p>Efficient local and cloud data storage solutions</p>
+                    <div class="tech-tags">
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Realm</span>
+                        <span class="tag">Core Data</span>
+                        <span class="tag">Room</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating beautiful, intuitive user interfaces</p>
+                    <div class="tech-tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">Sketch</span>
+                        <span class="tag">Adobe XD</span>
+                        <span class="tag">Material Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Let's Build Something Amazing</h2>
+            <p>Have a project in mind? Let's discuss how we can work together to create exceptional mobile experiences.</p>
+            <a href="mailto:hanifqpk@gmail.com" class="btn">
+                <span>📧</span>
+                hanifqpk@gmail.com
+            </a>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank" class="social-link">💻</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">💼</a>
+                <a href="https://twitter.com/yourusername" target="_blank" class="social-link">🐦</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>© 2025 Mobile Developer. All rights reserved.</p>
+        <p>© 2025 Hanif Qureshi. All rights reserved. | <a href="privacy.html" style="color: #999; text-decoration: none;">Privacy Policy</a></p>
     </footer>
 
     <script>
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -346,6 +638,16 @@
                     });
                 }
             });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     </script>
 </body>
