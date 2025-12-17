@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mashq AI - App Store Screenshots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 60px 20px;
+            overflow-x: auto;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .screenshot-card {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 40px;
+            padding: 50px 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 100px rgba(139, 92, 246, 0.3);
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            right: -100px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            z-index: 2;
+        }
+
+        .title-area {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .white-text {
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .phone-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .phone-frame {
+            width: 100%;
+            aspect-ratio: 9/19.5;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6),
+                        inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 3;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            border-radius: 42px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-tag {
+            margin-top: 30px;
+            text-align: center;
+            padding: 16px 30px;
+            background: rgba(139, 92, 246, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 25px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .feature-text {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .controls-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .info-text {
+            color: #60a5fa;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .controls {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <!-- Screenshot 1: Q&A -->
+        <div class="screenshot-card">
+            <div class="card-glow"></div>
+            <div class="card-number">1</div>
+            <div class="title-area">
+                <h2 class="main-title">
+                    <span class="white-text">Generate</span><br>
+                    <span class="gradient-text">Q&A Pairs</span>
+                </h2>
+                <p class="subtitle">AI-powered question generation</p>
+            </div>
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://i.imgur.com/placeholder1.png" alt="Q&A Screen" class="app-screenshot" id="screen1">
+                    </div>
+                </div>
+                <div class="feature-tag">
+                    <div class="feature-text">✨ Smart Q&A Generation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshot 2: Flashcards -->
+        <div class="screenshot-card">
+            <div class="card-glow"></div>
+            <div class="card-number">2</div>
+            <div class="title-area">
+                <h2 class="main-title">
+                    <span class="white-text">Create</span><br>
+                    <span class="gradient-text">Flashcards</span>
+                </h2>
+                <p class="subtitle">Master any topic with ease</p>
+            </div>
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://i.imgur.com/placeholder2.png" alt="Flashcards Screen" class="app-screenshot" id="screen2">
+                    </div>
+                </div>
+                <div class="feature-tag">
+                    <div class="feature-text">🎯 Interactive Learning</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshot 3: MCQs -->
+        <div class="screenshot-card">
+            <div class="card-glow"></div>
+            <div class="card-number">3</div>
+            <div class="title-area">
+                <h2 class="main-title">
+                    <span class="white-text">Practice</span><br>
+                    <span class="gradient-text">MCQs</span>
+                </h2>
+                <p class="subtitle">Test your knowledge instantly</p>
+            </div>
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://i.imgur.com/placeholder3.png" alt="MCQs Screen" class="app-screenshot" id="screen3">
+                    </div>
+                </div>
+                <div class="feature-tag">
+                    <div class="feature-text">📝 Multiple Choice Tests</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshot 4: Home -->
+        <div class="screenshot-card">
+            <div class="card-glow"></div>
+            <div class="card-number">4</div>
+            <div class="title-area">
+                <h2 class="main-title">
+                    <span class="white-text">All Features</span><br>
+                    <span class="gradient-text">In One Place</span>
+                </h2>
+                <p class="subtitle">Everything you need to learn</p>
+            </div>
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://i.imgur.com/placeholder4.png" alt="Home Screen" class="app-screenshot" id="screen4">
+                    </div>
+                </div>
+                <div class="feature-tag">
+                    <div class="feature-text">🏠 Unified Dashboard</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshot 5: Splash -->
+        <div class="screenshot-card">
+            <div class="card-glow"></div>
+            <div class="card-number">5</div>
+            <div class="title-area">
+                <h2 class="main-title">
+                    <span class="gradient-text">Mashq AI</span><br>
+                    <span class="white-text">Smart Learning</span>
+                </h2>
+                <p class="subtitle">Your AI study companion</p>
+            </div>
+            <div class="phone-container">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://i.imgur.com/placeholder5.png" alt="Splash Screen" class="app-screenshot" id="screen5">
+                    </div>
+                </div>
+                <div class="feature-tag">
+                    <div class="feature-text">🚀 Intelligent Content Creation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="controls-title">📸 Screenshot Tools</div>
+        <button class="btn" onclick="captureAll()">💾 Download Guide</button>
+        <button class="btn secondary" onclick="toggleControls()">👁️ Hide Controls</button>
+        <div class="info-box">
+            <div class="info-text">
+                <strong>Ready to use!</strong> To save: Press Ctrl+P (Cmd+P on Mac) and save as PDF, or use browser screenshot extension.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load the actual screenshots from your images
+        const screenshots = {
+            screen1: 'data:image/png;base64,...', // Q&A screenshot
+            screen2: 'data:image/png;base64,...', // Flashcards screenshot
+            screen3: 'data:image/png;base64,...', // MCQs screenshot
+            screen4: 'data:image/png;base64,...', // Home screenshot
+            screen5: 'data:image/png;base64,...'  // Splash screenshot
+        };
+
+        function toggleControls() {
+            const controls = document.querySelector('.controls');
+            controls.style.display = controls.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function captureAll() {
+            alert(`📱 HOW TO SAVE YOUR APP STORE SCREENSHOTS:
+
+OPTION 1 - Print to PDF (Recommended):
+✅ Press Ctrl+P (Windows) or Cmd+P (Mac)
+✅ Select "Save as PDF"
+✅ Choose "Print backgrounds"
+✅ Save and extract images from PDF
+
+OPTION 2 - Screenshot Tool:
+✅ Hide controls (click "Hide Controls" button)
+✅ Windows: Win+Shift+S or Snipping Tool
+✅ Mac: Cmd+Shift+4
+✅ Chrome Extension: "Full Page Screen Capture"
+
+OPTION 3 - Developer Tools:
+✅ Right-click on each card
+✅ "Inspect Element"
+✅ Right-click the element in inspector
+✅ "Capture node screenshot"
+
+📐 Size: Each screenshot is optimized for 6.9" iPhone
+💡 Tip: Make sure to capture the entire card including the glow effects!
+
+Your screenshots are ready for App Store! 🚀`);
+        }
+
+        // Auto-hide placeholder and show message to upload
+        window.addEventListener('load', function() {
+            console.log('🎨 Mashq AI App Store Screenshots Ready!');
+            console.log('📤 Please provide your actual screenshot URLs to replace placeholders');
+        });
+    </script>
+</body>
+</html>
